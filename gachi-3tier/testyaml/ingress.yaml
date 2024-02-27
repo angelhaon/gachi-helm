@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: web.losoveyoon.shop
+  - host: www.gachiargocd.shop
     http:
       paths:
       - path: /
@@ -18,7 +18,7 @@ spec:
             name: web
             port:
               number: 80
-  - host: was.losoveyoon.shop
+  - host: www.gachiargocd.shop
     http:
       paths:
       - path: /
