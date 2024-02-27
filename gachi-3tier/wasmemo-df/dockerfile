@@ -1,0 +1,27 @@
+FROM alpine:3.14 AS build
+  
+RUN apk --no-cache add wget tar \
+    && wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-8.2.0.tar.gz \
+    && tar -zxf mysql-connector-j-8.2.0.tar.gz
+
+RUN mkdir /opt/tomcat \
+    && wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.86/bin/apache-tomcat-9.0.86.tar.gz \
+    && tar -zxf apache-tomcat-9.0.86.tar.gz -C /opt/tomcat \
+    && chmod +x /opt/tomcat/apache-tomcat-9.0.86/bin/*.sh
+
+WORKDIR mysql-connector-j-8.2.0
+RUN cp mysql-connector-j-8.2.0.jar /opt/tomcat/apache-tomcat-9.0.86/lib
+
+FROM alpine:3.14
+RUN apk --no-cache add openjdk11-jre
+COPY --from=build /opt/tomcat /opt/tomcat
+COPY *.jsp /opt/tomcat/apache-tomcat-9.0.86/webapps/ROOT/
+
+# Create the directory if it doesn't exist
+RUN mkdir -p /usr/local/openjdk-11/lib/
+
+# Copy the JAR file
+RUN cp /opt/tomcat/apache-tomcat-9.0.86/lib/mysql-connector-j-8.2.0.jar /usr/local/openjdk-11/lib/
+
+EXPOSE 8080
+CMD ["/opt/tomcat/apache-tomcat-9.0.86/bin/catalina.sh", "run"]

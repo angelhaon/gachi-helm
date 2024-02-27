@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web 
+  template:
+    metadata:
+      labels:
+        app: web 
+    spec:
+      containers:
+      - name: web 
+        image: 851725265819.dkr.ecr.ap-northeast-2.amazonaws.com/webtest:1.5
+        ports:
+        - containerPort: 80
+        resources:
+          limits: 
+            cpu: 200m
+          requests:
+            cpu: 100m
+            memory: 50Mi
+
