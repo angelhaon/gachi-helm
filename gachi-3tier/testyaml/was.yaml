@@ -15,7 +15,7 @@ spec:
         app: was
     spec:
       containers:
-      - image: 851725265819.dkr.ecr.ap-northeast-2.amazonaws.com/wastest:1.0
+      - image: tomcat
         name: was
         ports:
         - containerPort: 8080
