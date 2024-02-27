@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: web 
-        image: 851725265819.dkr.ecr.ap-northeast-2.amazonaws.com/webtest:1.5
+        image: nginx
         ports:
         - containerPort: 80
         resources:
