@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: www.gachiargocd.shop
+  - host: bbb.gachiargocd.shop
     http:
       paths:
       - path: /
@@ -18,7 +18,7 @@ spec:
             name: web
             port:
               number: 80
-  - host: www.gachiargocd.shop
+  - host: ccc.gachiargocd.shop
     http:
       paths:
       - path: /
